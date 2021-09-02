@@ -1,3 +1,6 @@
+/*  */
+
+/* search */
 const searchBox = () => {
     const searchField = document.getElementById('input-field');
     const value = searchField.value;
@@ -8,21 +11,29 @@ const searchBox = () => {
         .then(data => loadBooks(data.docs))
 }
 
+/* load book here */
 const loadBooks = books => {
 
-    //result found
-    let len = books.length;
-    console.log('Result Found', len);
+    /* number of result found */
 
+    let len = books.length;
+    const findResult = document.getElementById('find-result');
+    const value = findResult.innerText;
+    const previousBalanceTotal = value;
+    const totalResultFound = 'Total Result Found' + ' ' + len;
+    findResult.innerText = totalResultFound;
+
+    /* number of result found  end Here*/
 
     for (let i = 0; i <= 10; i++) {
         const displayDetails = document.getElementById('details');
         const result = books[i];
-        console.log(result);
         const url = `https://covers.openlibrary.org/b/id/${result.cover_i}-M.jpg`
         fetch(url)
             .then(res => res.json)
             .then(data => console.log(data))
+
+        /* load book resourse on UI */
 
         const div = document.createElement('div');
         div.classList.add('col');
@@ -46,3 +57,5 @@ const loadBooks = books => {
 
     }
 }
+
+/* load book resourse on UI end here*/
